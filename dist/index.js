@@ -27403,35 +27403,6 @@ module.exports = parseParams
 /******/ }
 /******/ 
 /************************************************************************/
-/******/ /* webpack/runtime/compat get default export */
-/******/ (() => {
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__nccwpck_require__.n = (module) => {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			() => (module['default']) :
-/******/ 			() => (module);
-/******/ 		__nccwpck_require__.d(getter, { a: getter });
-/******/ 		return getter;
-/******/ 	};
-/******/ })();
-/******/ 
-/******/ /* webpack/runtime/define property getters */
-/******/ (() => {
-/******/ 	// define getter functions for harmony exports
-/******/ 	__nccwpck_require__.d = (exports, definition) => {
-/******/ 		for(var key in definition) {
-/******/ 			if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 			}
-/******/ 		}
-/******/ 	};
-/******/ })();
-/******/ 
-/******/ /* webpack/runtime/hasOwnProperty shorthand */
-/******/ (() => {
-/******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ })();
-/******/ 
 /******/ /* webpack/runtime/compat */
 /******/ 
 /******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
@@ -27439,13 +27410,12 @@ module.exports = parseParams
 /************************************************************************/
 var __webpack_exports__ = {};
 
+// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(4708);
 // EXTERNAL MODULE: external "child_process"
 var external_child_process_ = __nccwpck_require__(5317);
 // EXTERNAL MODULE: external "util"
 var external_util_ = __nccwpck_require__(9023);
-// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
-var core = __nccwpck_require__(4708);
-var core_default = /*#__PURE__*/__nccwpck_require__.n(core);
 ;// CONCATENATED MODULE: ./src/main.ts
 
 
@@ -27454,22 +27424,22 @@ const execAsync = (0,external_util_.promisify)(external_child_process_.exec);
 async function run() {
     try {
         const args = {
-            auth: "github",
-            repository: "$GITHUB_REPOSITORY",
-            organization: core_default().getInput("organization", { required: true }),
+            auth: 'github',
+            repository: '$GITHUB_REPOSITORY',
+            organization: (0,core.getInput)('organization', { required: true }),
         };
-        core_default().debug(`Running xeel with args: ${JSON.stringify(args)}`);
+        (0,core.debug)(`Running xeel with args: ${JSON.stringify(args)}`);
         const { stdout } = await execAsync(`npx xeel dependency-debt report ${Object.entries(args)
             .map(([key, value]) => `--${key} ${value}`)
-            .join(" ")}`);
-        core_default().info(stdout);
+            .join(' ')}`);
+        (0,core.info)(stdout);
     }
     catch (error) {
         if (error instanceof Error) {
-            core_default().setFailed(error.message);
+            (0,core.setFailed)(error.message);
         }
         else {
-            core_default().setFailed("An unknown error occurred");
+            (0,core.setFailed)('An unknown error occurred');
         }
     }
 }

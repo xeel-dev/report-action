@@ -31,6 +31,7 @@
     "@vercel/ncc": "^0.38.2",
     "only-allow": "^1.2.1",
     "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "shx": "^0.3.4",
     "typescript": "^5.6.3"
   },
