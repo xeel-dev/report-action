@@ -1,0 +1,37 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+  packages: read
+
+jobs:
+  test-action:
+    name: GitHub Actions Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Test Xeel Report Action
+        id: test-action
+        uses: ./
+        with:
+          organization: org_2mnXDBmAW7hWpwfq0NRiZsgamcD
+        env:
+          XEEL_API: 'https://api.xeel-dev.com'
+          XEEL_APP: 'https://app.xeel-dev.com'
+
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.test-action.outputs.time }}"
