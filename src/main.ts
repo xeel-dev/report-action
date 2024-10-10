@@ -13,7 +13,7 @@ export async function run() {
     };
     info('Installing @xeel-dev/cli…');
     await execAsync(
-      'echo "@xeel-dev:registry=https://npm.pkg.github.com" >> .npmrc',
+      'echo "@xeel-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc',
     );
     await execAsync('npm install --global @xeel-dev/cli');
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
