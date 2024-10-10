@@ -1,5 +1,6 @@
 import { debug, getInput, info, setFailed } from '@actions/core';
 import { exec } from '@actions/exec';
+import { appendFile } from 'fs/promises';
 
 export async function run() {
   try {
@@ -9,8 +10,9 @@ export async function run() {
       organization: getInput('organization', { required: true }),
     };
     info('Installing @xeel-dev/cli…');
-    await exec(
-      'echo "@xeel-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc',
+    await appendFile(
+      `${process.env.HOME}/.npmrc`,
+      '\n@xeel-dev:registry=https://npm.pkg.github.com\n',
     );
     await exec('npm install --global @xeel-dev/cli');
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
