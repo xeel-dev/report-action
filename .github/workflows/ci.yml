@@ -57,8 +57,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+      - run: node --version
       - name: Test Xeel Report Action
-        id: test-action
         uses: ./
         with:
           organization: org_2mnXDBmAW7hWpwfq0NRiZsgamcD

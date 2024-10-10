@@ -9,6 +9,17 @@ export async function run() {
       repository: '$GITHUB_REPOSITORY',
       organization: getInput('organization', { required: true }),
     };
+    await exec('node', ['--version'], {
+      listeners: {
+        stdout: (data) => {
+          const version = data.toString().trim();
+          info(`node --version stdout: ${version}`);
+          if (!version.startsWith('v20')) {
+            info('WHAT THE HECK');
+          }
+        },
+      },
+    });
     info('Installing @xeel-dev/cli…');
     await appendFile(
       `${process.env.HOME}/.npmrc`,

@@ -27427,6 +27427,17 @@ async function run() {
             repository: '$GITHUB_REPOSITORY',
             organization: (0,core.getInput)('organization', { required: true }),
         };
+        await (0,exec.exec)('node', ['--version'], {
+            listeners: {
+                stdout: (data) => {
+                    const version = data.toString().trim();
+                    (0,core.info)(`node --version stdout: ${version}`);
+                    if (!version.startsWith('v20')) {
+                        (0,core.info)('WHAT THE HECK');
+                    }
+                },
+            },
+        });
         (0,core.info)('Installing @xeel-dev/cli…');
         await (0,promises_namespaceObject.appendFile)(`${process.env.HOME}/.npmrc`, '\n@xeel-dev:registry=https://npm.pkg.github.com\n');
         await (0,exec.exec)('npm install --global @xeel-dev/cli');
