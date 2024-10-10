@@ -60,6 +60,7 @@ jobs:
           node-version-file: .nvmrc
       - uses: pnpm/action-setup@v4
       - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+      - run: pnpm install
       - name: Test Xeel Report Action
         uses: ./
         with:
