@@ -27428,6 +27428,8 @@ async function run() {
             repository: '$GITHUB_REPOSITORY',
             organization: (0,core.getInput)('organization', { required: true }),
         };
+        (0,core.info)('Installing @xeel-dev/cli…');
+        await execAsync('npm install --global @xeel-dev/cli');
         (0,core.debug)(`Running xeel with args: ${JSON.stringify(args)}`);
         const { stdout } = await execAsync(`npx xeel dependency-debt report ${Object.entries(args)
             .map(([key, value]) => `--${key} ${value}`)
