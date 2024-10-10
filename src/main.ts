@@ -1,8 +1,5 @@
 import { debug, getInput, info, setFailed } from '@actions/core';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
+import { exec } from '@actions/exec';
 
 export async function run() {
   try {
@@ -12,18 +9,17 @@ export async function run() {
       organization: getInput('organization', { required: true }),
     };
     info('Installing @xeel-dev/cli…');
-    await execAsync(
+    await exec(
       'echo "@xeel-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc',
     );
-    await execAsync('npm install --global @xeel-dev/cli');
+    await exec('npm install --global @xeel-dev/cli');
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
-    const { stdout } = await execAsync(
+    await exec(
       `npx xeel dependency-debt report ${Object.entries(args)
         .map(([key, value]) => `--${key} ${value}`)
         .join(' ')}`,
     );
-
-    info(stdout);
+    info('🚀 Report sent to Xeel!');
   } catch (error) {
     if (error instanceof Error) {
       setFailed(error.message);

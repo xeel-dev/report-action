@@ -27412,15 +27412,11 @@ var __webpack_exports__ = {};
 
 // EXTERNAL MODULE: ./node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
 var core = __nccwpck_require__(4708);
-// EXTERNAL MODULE: external "child_process"
-var external_child_process_ = __nccwpck_require__(5317);
-// EXTERNAL MODULE: external "util"
-var external_util_ = __nccwpck_require__(9023);
+// EXTERNAL MODULE: ./node_modules/.pnpm/@actions+exec@1.1.1/node_modules/@actions/exec/lib/exec.js
+var exec = __nccwpck_require__(9365);
 ;// CONCATENATED MODULE: ./src/main.ts
 
 
-
-const execAsync = (0,external_util_.promisify)(external_child_process_.exec);
 async function run() {
     try {
         const args = {
@@ -27429,13 +27425,13 @@ async function run() {
             organization: (0,core.getInput)('organization', { required: true }),
         };
         (0,core.info)('Installing @xeel-dev/cli…');
-        await execAsync('echo "@xeel-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc');
-        await execAsync('npm install --global @xeel-dev/cli');
+        await (0,exec.exec)('echo "@xeel-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc');
+        await (0,exec.exec)('npm install --global @xeel-dev/cli');
         (0,core.debug)(`Running xeel with args: ${JSON.stringify(args)}`);
-        const { stdout } = await execAsync(`npx xeel dependency-debt report ${Object.entries(args)
+        await (0,exec.exec)(`npx xeel dependency-debt report ${Object.entries(args)
             .map(([key, value]) => `--${key} ${value}`)
             .join(' ')}`);
-        (0,core.info)(stdout);
+        (0,core.info)('🚀 Report sent to Xeel!');
     }
     catch (error) {
         if (error instanceof Error) {
