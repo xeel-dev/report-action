@@ -11,6 +11,8 @@ export async function run() {
       repository: '$GITHUB_REPOSITORY',
       organization: getInput('organization', { required: true }),
     };
+    info('Installing @xeel-dev/cli…');
+    await execAsync('npm install --global @xeel-dev/cli');
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
     const { stdout } = await execAsync(
       `npx xeel dependency-debt report ${Object.entries(args)
