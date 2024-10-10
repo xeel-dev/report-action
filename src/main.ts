@@ -12,7 +12,9 @@ export async function run() {
       organization: getInput('organization', { required: true }),
     };
     info('Installing @xeel-dev/cli…');
-    await execAsync('npm install --global @xeel-dev/cli');
+    await execAsync(
+      'npm install --global @xeel-dev/cli --registry=https://npm.pkg.github.com',
+    );
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
     const { stdout } = await execAsync(
       `npx xeel dependency-debt report ${Object.entries(args)
