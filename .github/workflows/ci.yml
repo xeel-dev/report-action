@@ -64,7 +64,7 @@ jobs:
       - name: Test Xeel Report Action
         uses: ./
         with:
-          organization: org_2mnXDBmAW7hWpwfq0NRiZsgamcD
+          organization: 'x::org:64jlQszyh97h4u4d0IGc7J'
         env:
           XEEL_API: 'https://api.xeel-dev.com'
           XEEL_APP: 'https://app.xeel-dev.com'
