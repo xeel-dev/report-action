@@ -5,7 +5,7 @@ on:
     types: [published, edited]
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 jobs:
   build-and-test:
