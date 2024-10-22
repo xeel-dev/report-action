@@ -27414,12 +27414,10 @@ var __webpack_exports__ = {};
 var core = __nccwpck_require__(4708);
 // EXTERNAL MODULE: ./node_modules/.pnpm/@actions+exec@1.1.1/node_modules/@actions/exec/lib/exec.js
 var exec = __nccwpck_require__(9365);
-;// CONCATENATED MODULE: external "fs/promises"
-const promises_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs/promises");
 ;// CONCATENATED MODULE: ./src/main.ts
 
 
-
+const DEFAULT_PLUGINS = ['@xeel-dev/cli-npm-plugin'];
 async function run() {
     try {
         const args = {
@@ -27428,8 +27426,19 @@ async function run() {
             organization: (0,core.getInput)('organization', { required: true }),
         };
         (0,core.info)('Installing @xeel-dev/cli…');
-        await (0,promises_namespaceObject.appendFile)(`${process.env.HOME}/.npmrc`, '\n@xeel-dev:registry=https://npm.pkg.github.com\n');
         await (0,exec.exec)('npm install --global @xeel-dev/cli');
+        const pluginsInput = (0,core.getInput)('plugins');
+        const plugins = [];
+        if (pluginsInput) {
+            plugins.push(...pluginsInput.split(','));
+        }
+        else {
+            plugins.push(...DEFAULT_PLUGINS);
+        }
+        (0,core.info)('Installing Xeel plugins…');
+        for (const plugin of plugins) {
+            await (0,exec.exec)(`npx xeel plugins install ${plugin}`);
+        }
         (0,core.debug)(`Running xeel with args: ${JSON.stringify(args)}`);
         await (0,exec.exec)(`npx xeel dependency-debt report ${Object.entries(args)
             .map(([key, value]) => `--${key} ${value}`)
