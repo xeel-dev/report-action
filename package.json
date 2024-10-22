@@ -1,0 +1,40 @@
+{
+  "name": "@xeel-dev/report-action",
+  "version": "0.0.1",
+  "description": "GitHub Action to report project metrics to Xeel",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "homepage": "https://github.com/xeel-dev/report-action#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeel-dev/report-action.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xeel-dev/report-action/issues"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "prebuild": "shx rm -rf dist",
+    "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "20"
+  },
+  "packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca",
+  "devDependencies": {
+    "@types/node": "20",
+    "@vercel/ncc": "^0.38.2",
+    "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "shx": "^0.3.4",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1"
+  }
+}

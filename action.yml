@@ -1,0 +1,16 @@
+name: 'Xeel Report'
+description: 'Runs a report on the current repository and sends it to Xeel'
+author: 'Xeel, Inc.'
+
+# Define your inputs here.
+inputs:
+  organization:
+    description: 'The Xeel organization ID'
+    required: true
+  plugins:
+    description: 'The plugins to use for the report, as a comma-separated list'
+    required: false
+
+runs:
+  using: node20
+  main: dist/index.js
