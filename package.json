@@ -2,7 +2,7 @@
   "name": "@xeel-dev/report-action",
   "version": "0.0.1",
   "description": "GitHub Action to report project metrics to Xeel",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "type": "module",
   "homepage": "https://github.com/xeel-dev/report-action#readme",
@@ -14,11 +14,11 @@
     "url": "https://github.com/xeel-dev/report-action/issues"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.mjs"
   },
   "scripts": {
     "prebuild": "shx rm -rf dist",
-    "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt"
+    "build": "ncc build src/index.ts -o dist --license licenses.txt && mv ./dist/index.js ./dist/index.mjs"
   },
   "license": "MIT",
   "engines": {
