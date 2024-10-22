@@ -1,6 +1,7 @@
 import { debug, getInput, info, setFailed } from '@actions/core';
 import { exec } from '@actions/exec';
-import { appendFile } from 'fs/promises';
+
+const DEFAULT_PLUGINS = ['@xeel-dev/cli-npm-plugin'];
 
 export async function run() {
   try {
@@ -10,11 +11,18 @@ export async function run() {
       organization: getInput('organization', { required: true }),
     };
     info('Installing @xeel-dev/cli…');
-    await appendFile(
-      `${process.env.HOME}/.npmrc`,
-      '\n@xeel-dev:registry=https://npm.pkg.github.com\n',
-    );
     await exec('npm install --global @xeel-dev/cli');
+    const pluginsInput = getInput('plugins');
+    const plugins = [];
+    if (pluginsInput) {
+      plugins.push(...pluginsInput.split(','));
+    } else {
+      plugins.push(...DEFAULT_PLUGINS);
+    }
+    info('Installing Xeel plugins…');
+    for (const plugin of plugins) {
+      await exec(`npx xeel plugins install ${plugin}`);
+    }
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
     await exec(
       `npx xeel dependency-debt report ${Object.entries(args)

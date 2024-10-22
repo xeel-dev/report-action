@@ -1,18 +1,12 @@
-name: Continuous Integration
+name: Build & Run
 
 on:
   pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+  workflow_call:
 
 permissions:
   contents: read
   id-token: write
-  packages: read
-
 jobs:
   check-dist:
     name: Check dist/
@@ -50,21 +44,3 @@ jobs:
         with:
           name: dist
           path: dist/
-  test-action:
-    name: GitHub Actions Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-      - uses: pnpm/action-setup@v4
-      - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-      - run: pnpm install
-      - name: Test Xeel Report Action
-        uses: ./
-        with:
-          organization: 'x::org:64jlQszyh97h4u4d0IGc7J'
-        env:
-          XEEL_API: 'https://api.xeel-dev.com'
-          XEEL_APP: 'https://app.xeel-dev.com'
