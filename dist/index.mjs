@@ -27417,7 +27417,10 @@ var exec = __nccwpck_require__(9365);
 ;// CONCATENATED MODULE: ./src/main.ts
 
 
-const DEFAULT_PLUGINS = ['@xeel-dev/cli-npm-plugin'];
+const DEFAULT_PLUGINS = [
+    '@xeel-dev/cli-npm-plugin',
+    '@xeel-dev/cli-docker-plugin',
+];
 async function run() {
     try {
         const args = {
