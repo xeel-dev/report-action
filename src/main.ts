@@ -1,7 +1,10 @@
 import { debug, getInput, info, setFailed } from '@actions/core';
 import { exec } from '@actions/exec';
 
-const DEFAULT_PLUGINS = ['@xeel-dev/cli-npm-plugin'];
+const DEFAULT_PLUGINS = [
+  '@xeel-dev/cli-npm-plugin',
+  '@xeel-dev/cli-docker-plugin',
+];
 
 export async function run() {
   try {
