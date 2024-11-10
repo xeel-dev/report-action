@@ -10,7 +10,7 @@ export async function run() {
   try {
     const args = {
       auth: 'github',
-      repository: getInput('repository') ?? process.env.GITHUB_REPOSITORY_ID,
+      repository: getInput('repository') || process.env.GITHUB_REPOSITORY_ID,
       organization: getInput('organization', { required: true }),
     };
     info('Installing @xeel-dev/cli…');
