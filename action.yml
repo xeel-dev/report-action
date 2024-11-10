@@ -7,6 +7,9 @@ inputs:
   organization:
     description: 'The Xeel organization ID'
     required: true
+  repository:
+    description: 'The Xeel repository ID. Defaults to the current repository'
+    required: false
   plugins:
     description: 'The plugins to use for the report, as a comma-separated list'
     required: false
