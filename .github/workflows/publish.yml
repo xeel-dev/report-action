@@ -28,18 +28,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   notify:
+    needs: [publish]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Extract release changelog
-        id: changelog
-        run: echo "changelog=$(jq -r .body < $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
       - name: Send changelog to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           CHANGELOG: ${{ env.changelog }}
         run: |
           curl -H "Content-Type: application/json" \
-               -d "{\"content\": \"**New Release Published: $GITHUB_REPOSITORY@$GITHUB_REF_NAME**\n\n${CHANGELOG}\"}" \
+               -d "{\"content\": \"🚀 **New Release Published: [$GITHUB_REPOSITORY@$GITHUB_REF_NAME](https://github.com/$GITHUB_REPOSITORY/releases/tag/$GITHUB_REF_NAME)**\"}" \
                "$DISCORD_WEBHOOK_URL"
