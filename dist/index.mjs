@@ -27443,7 +27443,7 @@ async function run() {
             await (0,exec.exec)(`npx xeel plugins install ${plugin}`);
         }
         (0,core.debug)(`Running xeel with args: ${JSON.stringify(args)}`);
-        await (0,exec.exec)(`npx xeel dependency-debt report ${Object.entries(args)
+        await (0,exec.exec)(`npx xeel version-debt report ${Object.entries(args)
             .map(([key, value]) => `--${key} ${value}`)
             .join(' ')}`);
         (0,core.info)('🚀 Report sent to Xeel!');

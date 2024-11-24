@@ -28,7 +28,7 @@ export async function run() {
     }
     debug(`Running xeel with args: ${JSON.stringify(args)}`);
     await exec(
-      `npx xeel dependency-debt report ${Object.entries(args)
+      `npx xeel version-debt report ${Object.entries(args)
         .map(([key, value]) => `--${key} ${value}`)
         .join(' ')}`,
     );
