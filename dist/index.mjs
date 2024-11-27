@@ -27420,6 +27420,7 @@ var exec = __nccwpck_require__(9365);
 const DEFAULT_PLUGINS = [
     '@xeel-dev/cli-npm-plugin',
     '@xeel-dev/cli-docker-plugin',
+    '@xeel-dev/cli-python-plugin',
 ];
 async function run() {
     try {

@@ -4,6 +4,7 @@ import { exec } from '@actions/exec';
 const DEFAULT_PLUGINS = [
   '@xeel-dev/cli-npm-plugin',
   '@xeel-dev/cli-docker-plugin',
+  '@xeel-dev/cli-python-plugin',
 ];
 
 export async function run() {
